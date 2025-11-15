@@ -14,6 +14,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error reading file: %v", err)
 	}
+	mostCaloriesElf, mostCalories := getElfWithMostCalories(caloriesFile)
+	fmt.Printf("Most calories elf: %d  with %d calories \n", mostCaloriesElf, mostCalories)
+}
+
+
+func getElfWithMostCalories(caloriesFile *os.File) (int, int) {
 	scanner := bufio.NewScanner(caloriesFile)
 	mostCalories := 0
 	mostCaloriesElf := 1
@@ -28,10 +34,9 @@ func main() {
 		}
 		if currentCalories == 0 {
 			currentCalories = 0
-			fmt.Println("New elf")
 			currentElf += 1
 			currentElfCalories = 0
 		}
 	}
-	fmt.Printf("Most calories elf: %d  with %d calories \n", mostCaloriesElf, mostCalories)
+	return mostCaloriesElf, mostCalories
 }
